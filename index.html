@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .f1 {
+            font-family: 'SecondFont';
+            font-size: 100px;
+        }
+
+        .f2 {
+            font-family: 'FirstFont';
+            font-size: 100px;
+        }
+
+        .none {
+            display: none;
+        }
+    </style>
+    <title>Document</title>
+    <script src="font_loader.js"></script>
+    <script>
+        (async () => {
+            try {
+                // font_loader will raise exception on even 1 thing fail. if not returns true
+                await font_loader([
+                    { name: 'FirstFont', path: 'https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_ten@1.0/fromdamiM.woff' },
+                    { name: 'SecondFont', path: 'https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoFlowerIslandA.woff' },
+                ], font_name => {
+                    console.log(font_name + ' loading complete');
+                });
+                document.querySelectorAll('div').forEach(element => {
+                    element.classList.toggle('none', false);
+                });
+            } catch (e) {
+                console.log('Fails to load fonts. It is sad.');
+            }
+        })();
+
+    </script>
+</head>
+
+<body>
+    <div class="f1 none">Fox</div>
+    <div class="f2 none">Tiger</div>
+</body>
+
+</html>
